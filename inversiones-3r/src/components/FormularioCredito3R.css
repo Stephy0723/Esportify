@@ -1,0 +1,127 @@
+/* Fondo general */
+body {
+  background: #f4f6f8;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  max-width: 960px;
+  margin: 50px auto;
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo */
+.logo {
+  display: block;
+  margin: 0 auto 30px;
+  max-width: 160px;
+}
+
+/* Título principal */
+h2 {
+  text-align: center;
+  font-size: 26px;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* Título de secciones */
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 40px 0 20px;
+  padding-left: 12px;
+  border-left: 4px solid #3498db;
+}
+
+/* Estructura de grid por secciones */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Cada campo (label + input) vertical */
+.form-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo de los labels */
+label {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+/* Estilo de los inputs tipo línea inferior */
+input,
+textarea {
+  border: none;
+  border-bottom: 1px solid #bbb;
+  background: transparent;
+  padding: 10px 5px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Efecto al enfocar */
+input:focus,
+textarea:focus {
+  border-bottom: 2px solid #2980b9;
+  background-color: transparent;
+}
+
+/* Área de texto */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  grid-column: span 2;
+}
+
+/* Botón de envío */
+button {
+  margin-top: 40px;
+  width: 100%;
+  background-color: #2980b9;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #21618c;
+}
+
+select {
+  border: none;
+  border-bottom: 1px solid #bbb;
+  background: transparent;
+  padding: 10px 5px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='5'%3E%3Cpath fill='%23444' d='M0,0 L5,5 L10,0'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 5px;
+}
+
+select:focus {
+  border-bottom: 2px solid #2980b9;
+}
