@@ -19,7 +19,11 @@ class WelcomeScreen extends StatelessWidget {
               // Logo centrado y grande
               Center(
                 child: Image.asset(
+<<<<<<< HEAD
                   'assets/logos/DE.logo.png',
+=======
+                  'lib/assets/login/dawn esport.png',
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
                   width: 220,
                   height: 220,
                   fit: BoxFit.contain,
@@ -105,8 +109,12 @@ class WelcomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+<<<<<<< HEAD
                               builder: (context) =>
                                   RegisterStepOne(userData: {}),
+=======
+                              builder: (context) => StepOne(userData: {}),
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
                             ),
                           );
                         },

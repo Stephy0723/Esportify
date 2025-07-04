@@ -6,12 +6,18 @@ import 'inicio_page.dart';
 import 'comunidad_page.dart';
 import 'torneos_page.dart';
 import 'clases_pro_page.dart';
+<<<<<<< HEAD
 import 'perfil_page.dart';
 import 'chat_general_page.dart';
 
 import '../widgets/TopIconsBar.dart';
 import '../widgets/NotificationsDialog.dart';
 import '../widgets/SearchDialog.dart';
+=======
+import '../configuracion/configuracion_page.dart';
+import 'chat_general_page.dart';
+import 'transmision_page.dart';
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,11 +29,20 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static final _pages = [
+<<<<<<< HEAD
     const InicioPage(),
     const ComunidadPage(),
     const TorneosPage(),
     const ClasesProPage(),
     const PerfilPage(),
+=======
+    const InicioPage(), // index 0
+    const ComunidadPage(), // index 1
+    const TorneosPage(), // index 2
+    const ClasesProPage(), // index 3
+    const TransmisionPage(), // index 4
+    const ConfiguracionPage(), // index 5
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
   ];
 
   @override
@@ -36,6 +51,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.black,
+<<<<<<< HEAD
       body: SafeArea(
         child: Column(
           children: [
@@ -55,6 +71,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+=======
+      body: SafeArea(child: _pages[_selectedIndex]),
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
       bottomNavigationBar: SafeArea(
         child: CustomNavBar(
           selectedIndex: _selectedIndex,

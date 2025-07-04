@@ -71,6 +71,7 @@ exports.register = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 
 exports.login = async (req, res) => {
     try {
@@ -130,3 +131,73 @@ exports.checkUserExists = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+=======
+exports.login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({
+      $or: [{ username }, { email: username }]
+    });
+    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid password' });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
+    );
+    res.status(200).json({ token, userId: user._id });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.checkUserExists = async (req, res) => {
+  const { email, username } = req.body;
+  try {
+    const userByUsername = await User.findOne({ username });
+    const userByEmail = await User.findOne({ email });
+
+    let fields = [];
+    let messages = {};
+
+    if (userByUsername) {
+      fields.push('username');
+      messages.username = 'El nombre de usuario ya está en uso';
+    }
+    if (userByEmail) {
+      fields.push('email');
+      messages.email = 'El correo ya está en uso';
+    }
+
+    if (fields.length > 0) {
+      return res.status(200).json({
+        exists: true,
+        fields,
+        messages
+      });
+    }
+
+    return res.status(200).json({ exists: false });
+  } catch (error) {
+    console.error('Error checking user existence:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// 🚀 NUEVO MÉTODO: Obtener datos del usuario por ID
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+    res.status(200).json(user);
+  } catch (err) {
+    console.error('Error al buscar usuario:', err);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};
+>>>>>>> bebbbff (Progreso actual de registro y validaciones)
