@@ -1,37 +1,21 @@
-<<<<<<< HEAD
 // lib/register/register_step_one.dart
 
-=======
-// lib//_step_one.dart
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 import 'package:esportefy/data/connect_to_backend.dart';
 import 'package:flutter/material.dart';
 import '../data/countries.dart'; // Lista de países latinoamericanos
 import '../data/provinces.dart'; // Mapa país → provincias
 import 'register_step_two.dart'; // Debe existir este archivo
 
-<<<<<<< HEAD
 class RegisterStepOne extends StatefulWidget {
   const RegisterStepOne({super.key, required this.userData});
-=======
-class StepOne extends StatefulWidget {
-  const StepOne({super.key, required this.userData});
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
   final Map<String, String?> userData;
 
   @override
-<<<<<<< HEAD
   State<RegisterStepOne> createState() => _RegisterStepOneState();
 }
 
 class _RegisterStepOneState extends State<RegisterStepOne> {
-=======
-  State<StepOne> createState() => _StepOneState();
-}
-
-class _StepOneState extends State<StepOne> {
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fechaController = TextEditingController();
 

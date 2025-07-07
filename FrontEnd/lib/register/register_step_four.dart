@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 // lib/register/register_step_four.dart
-=======
-// lib//_step_four.dart
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
 import 'package:esportefy/data/connect_to_backend.dart';
 import 'package:flutter/material.dart';
 import '../LoginScreen.dart'; // Ajusta según tu ruta real
 
-<<<<<<< HEAD
 class RegisterStepFour extends StatefulWidget {
   const RegisterStepFour({super.key, required this.userData});
   final Map<String, String?> userData;
@@ -18,17 +13,6 @@ class RegisterStepFour extends StatefulWidget {
 }
 
 class _RegisterStepFourState extends State<RegisterStepFour> {
-=======
-class StepFour extends StatefulWidget {
-  const StepFour({super.key, required this.userData});
-  final Map<String, String?> userData;
-
-  @override
-  State<StepFour> createState() => _StepFourState();
-}
-
-class _StepFourState extends State<StepFour> {
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
   bool _selectAll = false;
   bool _acceptTerms = false;
   bool _acceptPrivacy = false;

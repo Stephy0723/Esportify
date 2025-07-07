@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'register/register_step_one.dart';
-<<<<<<< HEAD
 import 'loading/LoadingScreen.dart';
 import 'page/home_page.dart';
 import 'data/connect_to_backend.dart'; // Importa tu servicio
-=======
-import 'page/home_page.dart';
-import 'data/connect_to_backend.dart'; // Importa tu ervicio
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -39,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         Navigator.pushReplacement(
           context,
-<<<<<<< HEAD
           MaterialPageRoute(
             builder: (_) => LoadingScreen(
               onLoadComplete: () async {
@@ -50,9 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
           ),
-=======
-          MaterialPageRoute(builder: (_) => const HomePage()),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
         );
       } else {
         ScaffoldMessenger.of(
@@ -107,11 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 12),
                 Center(
                   child: Image.asset(
-<<<<<<< HEAD
                     'assets/pacman.gif',
-=======
-                    'lib/assets/login/pacman.gif',
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
                     width: 80,
                     height: 80,
                   ),
@@ -186,11 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-<<<<<<< HEAD
                             builder: (_) => RegisterStepOne(userData: {}),
-=======
-                            builder: (_) => StepOne(userData: {}),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
                           ),
                         );
                       },

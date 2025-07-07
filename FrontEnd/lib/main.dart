@@ -15,6 +15,8 @@ class EsportefyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Esportefy',
       debugShowCheckedModeBanner: false,
+
+      // ─── Aquí van los delegados de localización ──────────────────
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -29,9 +31,6 @@ class EsportefyApp extends StatelessWidget {
       theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFF2F2F2)),
 
       home: const WelcomeScreen(),
-      supportedLocales: const [Locale('es', 'ES'), Locale('en', 'US')],
-      theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF2F2F2)),
-      home: const HomePage(), // <- Aquí se inicia ahora
     );
   }
 }

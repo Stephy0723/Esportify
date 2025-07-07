@@ -33,6 +33,8 @@ dependencies:
 
   # Navegación
   http: ^1.4.0
+  image_picker: ^1.1.2
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -70,5 +72,4 @@ flutter:
     - assets/comunidad/comunidad.valo.jpeg
     - assets/comunidad/comunidad.wild.jpeg
     - assets/game/mlbb.game.png
-
 
