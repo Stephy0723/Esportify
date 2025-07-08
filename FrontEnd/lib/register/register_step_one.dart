@@ -1,21 +1,20 @@
-// lib/register/register_step_one.dart
-
+// lib//_step_one.dart
 import 'package:esportefy/data/connect_to_backend.dart';
 import 'package:flutter/material.dart';
 import '../data/countries.dart'; // Lista de países latinoamericanos
 import '../data/provinces.dart'; // Mapa país → provincias
 import 'register_step_two.dart'; // Debe existir este archivo
 
-class RegisterStepOne extends StatefulWidget {
-  const RegisterStepOne({super.key, required this.userData});
+class StepOne extends StatefulWidget {
+  const StepOne({super.key, required this.userData});
 
   final Map<String, String?> userData;
 
   @override
-  State<RegisterStepOne> createState() => _RegisterStepOneState();
+  State<StepOne> createState() => _StepOneState();
 }
 
-class _RegisterStepOneState extends State<RegisterStepOne> {
+class _StepOneState extends State<StepOne> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fechaController = TextEditingController();
 

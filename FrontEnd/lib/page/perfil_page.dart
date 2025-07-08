@@ -13,4 +13,5 @@ class PerfilPage extends StatelessWidget {
     );
   }
 }
+
 // This page can be expanded with user profile details, settings, etc.

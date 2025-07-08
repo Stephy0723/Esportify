@@ -41,7 +41,12 @@ class CustomNavBar extends StatelessWidget {
       color: Colors.orangeAccent,
     ),
     _NavItem(
-      icon: Icons.settings_outlined, // ícono de ajustes
+      icon: Icons.live_tv_outlined, // 👈 NUEVO ícono para Transmisión
+      label: 'Transmisión',
+      color: Colors.cyanAccent,
+    ),
+    _NavItem(
+      icon: Icons.settings_outlined,
       label: 'Ajustes',
       color: Colors.pinkAccent,
     ),

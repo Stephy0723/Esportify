@@ -15,15 +15,15 @@ class RegisterStepThree extends StatefulWidget {
 class _RegisterStepThreeState extends State<RegisterStepThree> {
   // -------------------- Juegos (9 items, Overwatch2 eliminado) --------------------
   final List<Map<String, String>> _games = [
-    {'id': 'hok', 'asset': 'assets/icons/hok...logo.png'},
-    {'id': 'lol', 'asset': 'assets/icons/lol...logo.png'},
-    {'id': 'mlbb', 'asset': 'assets/icons/mlbb..logo.png'},
-    {'id': 'mk', 'asset': 'assets/icons/MK.logo.png'},
-    {'id': 'sf6', 'asset': 'assets/icons/sf6.logo.png'},
-    {'id': 'tft', 'asset': 'assets/icons/tft.logo.png'},
-    {'id': 'wildrift', 'asset': 'assets/icons/wldrft.logo.png'},
-    {'id': 'marvel', 'asset': 'assets/icons/marvel.logo.png'},
-    {'id': 'freefire', 'asset': 'assets/icons/Frefire.logo.png'},
+    {'id': 'hok', 'asset': 'assets/registro/hok.logo.png'},
+    {'id': 'lol', 'asset': 'assets/registro/lol.logo.png'},
+    {'id': 'mlbb', 'asset': 'assets/registro/mlbb.logo.png'},
+    {'id': 'mk', 'asset': 'assets/registro/MK.logo.png'},
+    {'id': 'sf6', 'asset': 'assets/registro/sf6.logo.png'},
+    {'id': 'tft', 'asset': 'assets/registro/tft.logo.png'},
+    {'id': 'wildrift', 'asset': 'assets/registro/wldrft.logo.png'},
+    {'id': 'marvel', 'asset': 'assets/registro/marvel.logo.png'},
+    {'id': 'freefire', 'asset': 'assets/registro/Frefire.logo.png'},
   ];
   final Set<String> _selectedGames = {};
 
@@ -58,7 +58,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => RegisterStepFour(
+        builder: (_) => StepFour(
           userData: {
             ...widget.userData,
             'juegosFavoritos': _selectedGames.isNotEmpty
@@ -233,8 +233,4 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
       ),
     );
   }
-
-  // This page allows users to select their favorite games and platforms, and optionally enter a custom game.
-  // It uses a grid for game logos and choice chips for platforms, with navigation to the next
 }
-// step in the registration process.

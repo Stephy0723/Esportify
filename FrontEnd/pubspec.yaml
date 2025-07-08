@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  qr_flutter: ^4.0.0
+  screenshot: ^1.3.0
+  image_picker: ^1.0.4
+
 
   # Tipografía
   google_fonts: ^4.0.3
@@ -33,8 +37,6 @@ dependencies:
 
   # Navegación
   http: ^1.4.0
-  image_picker: ^1.1.2
-  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -45,31 +47,25 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/logos/DE.logo.png
-    - assets/loanding.gif
-    - assets/icons/wldrft.logo.png
-    - assets/icons/tft.logo.png
-    - assets/icons/sf6.logo.png
-    - assets/icons/mlbb..logo.png
-    - assets/icons/MK.logo.png
-    - assets/icons/marvel.logo.png
-    - assets/icons/lol...logo.png
-    - assets/icons/hok...logo.png
-    - assets/icons/Frefire.logo.png
-    - assets/pacman.gif
-    - assets/logos/DE.logo.png
 
-    - assets/logos/Fornite.jpg
-    - assets/logos/Honor.jpg
-    - assets/logos/mlbb.portada...jpg
-    - assets/logos/lol.portada.jpg
-    - assets/logos/wldrft.portada.jpg
+    - lib/assets/roles/exp.line.png
+    - lib/assets/roles/gold.lane.png
+    - lib/assets/roles/jungle.lane.png
+    - lib/assets/roles/mid.lane.png
+    - lib/assets/roles/roam.lane.png
+
+    - lib/assets/login/dawn esport.png
+    - lib/assets/login/pacman.gif
+
+    - lib/assets/registro/Frefire.logo.png
+    - lib/assets/registro/hok.logo.png
+    - lib/assets/registro/lol.logo.png
+    - lib/assets/registro/marvel.logo.png
+    - lib/assets/registro/MK.logo.png
+    - lib/assets/registro/mlbb.logo.png
+    - lib/assets/registro/sf6.logo.png
+    - lib/assets/registro/tft.logo.png
+    - lib/assets/registro/wldrft.logo.png
 
 
-    - assets/comunidad/comunidad.hok.jpg
-    - assets/comunidad/comunidad.lol.jpg
-    - assets/comunidad/comunidad.mlbb.jpg
-    - assets/comunidad/comunidad.valo.jpeg
-    - assets/comunidad/comunidad.wild.jpeg
-    - assets/game/mlbb.game.png
 

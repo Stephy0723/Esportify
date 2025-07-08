@@ -6,12 +6,9 @@ import 'inicio_page.dart';
 import 'comunidad_page.dart';
 import 'torneos_page.dart';
 import 'clases_pro_page.dart';
-import 'perfil_page.dart';
+import '../configuracion/configuracion_page.dart';
 import 'chat_general_page.dart';
-
-import '../widgets/TopIconsBar.dart';
-import '../widgets/NotificationsDialog.dart';
-import '../widgets/SearchDialog.dart';
+import 'transmision_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,11 +20,12 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static final _pages = [
-    const InicioPage(),
-    const ComunidadPage(),
-    const TorneosPage(),
-    const ClasesProPage(),
-    const PerfilPage(),
+    const InicioPage(), // index 0
+    const ComunidadPage(), // index 1
+    const TorneosPage(), // index 2
+    const ClasesProPage(), // index 3
+    const TransmisionPage(), // index 4
+    const ConfiguracionPage(), // index 5
   ];
 
   @override
@@ -36,25 +34,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TopIconsBar(
-                onUserTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Usuario tocado')),
-                  );
-                },
-                onNotificationsTap: () => NotificationsDialog.show(context),
-                onSearchTap: () => SearchDialog.show(context),
-              ),
-            ),
-            Expanded(child: _pages[_selectedIndex]),
-          ],
-        ),
-      ),
+      body: SafeArea(child: _pages[_selectedIndex]),
       bottomNavigationBar: SafeArea(
         child: CustomNavBar(
           selectedIndex: _selectedIndex,

@@ -1,18 +1,18 @@
-// lib/register/register_step_four.dart
+// lib//_step_four.dart
 
 import 'package:esportefy/data/connect_to_backend.dart';
 import 'package:flutter/material.dart';
 import '../LoginScreen.dart'; // Ajusta según tu ruta real
 
-class RegisterStepFour extends StatefulWidget {
-  const RegisterStepFour({super.key, required this.userData});
+class StepFour extends StatefulWidget {
+  const StepFour({super.key, required this.userData});
   final Map<String, String?> userData;
 
   @override
-  State<RegisterStepFour> createState() => _RegisterStepFourState();
+  State<StepFour> createState() => _StepFourState();
 }
 
-class _RegisterStepFourState extends State<RegisterStepFour> {
+class _StepFourState extends State<StepFour> {
   bool _selectAll = false;
   bool _acceptTerms = false;
   bool _acceptPrivacy = false;

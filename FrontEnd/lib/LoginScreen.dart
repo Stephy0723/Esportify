@@ -25,6 +25,11 @@ class _LoginScreenState extends State<LoginScreen> {
         const SnackBar(content: Text('Completa usuario y contraseña')),
       );
       return;
+    } else if (_isLoading) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ya se está procesando la solicitud')),
+      );
+      return;
     }
 
     setState(() => _isLoading = true);
@@ -173,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => RegisterStepOne(userData: {}),
+                            builder: (_) => StepOne(userData: {}),
                           ),
                         );
                       },
