@@ -31,26 +31,12 @@ class CustomNavBar extends StatelessWidget {
       color: Colors.purpleAccent,
     ),
     _NavItem(
-      icon: Icons.emoji_events_outlined,
-      label: 'Torneos',
-      color: Colors.greenAccent,
-    ),
-    _NavItem(
-      icon: Icons.school_outlined,
-      label: 'Clases Pro',
-      color: Colors.orangeAccent,
-    ),
-    _NavItem(
-<<<<<<< HEAD
-      icon: Icons.settings_outlined, // ícono de ajustes
-=======
-      icon: Icons.live_tv_outlined, // 👈 NUEVO ícono para Transmisión
+      icon: Icons.live_tv_outlined, // Transmisión
       label: 'Transmisión',
       color: Colors.cyanAccent,
     ),
     _NavItem(
       icon: Icons.settings_outlined,
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
       label: 'Ajustes',
       color: Colors.pinkAccent,
     ),

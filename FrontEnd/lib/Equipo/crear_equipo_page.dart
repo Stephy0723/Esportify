@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'Modalidad/crear_moba.dart';
-import 'Modalidad/crear_battle_royale.dart';
-import 'Modalidad/crear_fighting.dart';
-import 'Modalidad/crear_shooter.dart';
-import 'Modalidad/crear_sports.dart';
-import 'Modalidad/estrategia_form.dart';
 
 class CrearEquipoPage extends StatefulWidget {
   const CrearEquipoPage({super.key});
@@ -14,15 +9,11 @@ class CrearEquipoPage extends StatefulWidget {
 }
 
 class _CrearEquipoPageState extends State<CrearEquipoPage> {
-  String? modalidadSeleccionada;
+  String? modalidadSeleccionada = "MOBA"; // ✅ Valor por defecto
 
   final Map<String, Widget> formularios = {
     "MOBA": const MobaForm(),
-    "Battle Royale": const BattleRoyaleForm(),
-    "Fighting": const FightingForm(),
-    "Shooter": const ShooterForm(),
-    "Sports": const SportForm(),
-    "Estrategia": const EstrategiaForm(),
+    // puedes agregar más aquí en el futuro
   };
 
   @override
@@ -79,14 +70,7 @@ class _CrearEquipoPageState extends State<CrearEquipoPage> {
             Expanded(
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
-                child: modalidadSeleccionada != null
-                    ? formularios[modalidadSeleccionada]!
-                    : const Center(
-                        child: Text(
-                          "Selecciona una modalidad para continuar",
-                          style: TextStyle(color: Colors.white38),
-                        ),
-                      ),
+                child: formularios[modalidadSeleccionada]!,
               ),
             ),
           ],

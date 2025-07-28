@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'register/register_step_one.dart';
-<<<<<<< HEAD
+import 'register/forgot_password_page.dart'; // NUEVA PESTAÑA
 import 'loading/LoadingScreen.dart';
 import 'page/home_page.dart';
 import 'data/connect_to_backend.dart'; // Importa tu servicio
-=======
-import 'page/home_page.dart';
-import 'data/connect_to_backend.dart'; // Importa tu ervicio
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,6 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
         const SnackBar(content: Text('Completa usuario y contraseña')),
       );
       return;
+    } else if (_isLoading) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ya se está procesando la solicitud')),
+      );
+      return;
     }
 
     setState(() => _isLoading = true);
@@ -39,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         Navigator.pushReplacement(
           context,
-<<<<<<< HEAD
           MaterialPageRoute(
             builder: (_) => LoadingScreen(
               onLoadComplete: () async {
@@ -50,9 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
           ),
-=======
-          MaterialPageRoute(builder: (_) => const HomePage()),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
         );
       } else {
         ScaffoldMessenger.of(
@@ -96,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Center(
                   child: Text(
-                    'Esportefy',
+                    'Esportify',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -107,11 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 12),
                 Center(
                   child: Image.asset(
-<<<<<<< HEAD
-                    'assets/pacman.gif',
-=======
                     'lib/assets/login/pacman.gif',
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
                     width: 80,
                     height: 80,
                   ),
@@ -152,7 +145,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      '¿Olvidaste tu contraseña?',
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 SizedBox(
                   height: 48,
                   child: ElevatedButton(
@@ -186,11 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-<<<<<<< HEAD
-                            builder: (_) => RegisterStepOne(userData: {}),
-=======
                             builder: (_) => StepOne(userData: {}),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
                           ),
                         );
                       },

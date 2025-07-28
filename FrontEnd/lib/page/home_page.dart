@@ -4,20 +4,9 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../widgets/custom_navbar.dart';
 import 'inicio_page.dart';
 import 'comunidad_page.dart';
-import 'torneos_page.dart';
-import 'clases_pro_page.dart';
-<<<<<<< HEAD
-import 'perfil_page.dart';
-import 'chat_general_page.dart';
-
-import '../widgets/TopIconsBar.dart';
-import '../widgets/NotificationsDialog.dart';
-import '../widgets/SearchDialog.dart';
-=======
 import '../configuracion/configuracion_page.dart';
 import 'chat_general_page.dart';
 import 'transmision_page.dart';
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,20 +18,10 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static final _pages = [
-<<<<<<< HEAD
-    const InicioPage(),
-    const ComunidadPage(),
-    const TorneosPage(),
-    const ClasesProPage(),
-    const PerfilPage(),
-=======
     const InicioPage(), // index 0
     const ComunidadPage(), // index 1
-    const TorneosPage(), // index 2
-    const ClasesProPage(), // index 3
-    const TransmisionPage(), // index 4
-    const ConfiguracionPage(), // index 5
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
+    const TransmisionPage(), // index 2
+    const ConfiguracionPage(), // index 3
   ];
 
   @override
@@ -51,29 +30,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-<<<<<<< HEAD
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TopIconsBar(
-                onUserTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Usuario tocado')),
-                  );
-                },
-                onNotificationsTap: () => NotificationsDialog.show(context),
-                onSearchTap: () => SearchDialog.show(context),
-              ),
-            ),
-            Expanded(child: _pages[_selectedIndex]),
-          ],
-        ),
-      ),
-=======
       body: SafeArea(child: _pages[_selectedIndex]),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
       bottomNavigationBar: SafeArea(
         child: CustomNavBar(
           selectedIndex: _selectedIndex,

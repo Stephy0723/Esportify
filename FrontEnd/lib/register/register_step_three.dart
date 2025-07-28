@@ -15,17 +15,6 @@ class RegisterStepThree extends StatefulWidget {
 class _RegisterStepThreeState extends State<RegisterStepThree> {
   // -------------------- Juegos (9 items, Overwatch2 eliminado) --------------------
   final List<Map<String, String>> _games = [
-<<<<<<< HEAD
-    {'id': 'hok', 'asset': 'assets/icons/hok...logo.png'},
-    {'id': 'lol', 'asset': 'assets/icons/lol...logo.png'},
-    {'id': 'mlbb', 'asset': 'assets/icons/mlbb..logo.png'},
-    {'id': 'mk', 'asset': 'assets/icons/MK.logo.png'},
-    {'id': 'sf6', 'asset': 'assets/icons/sf6.logo.png'},
-    {'id': 'tft', 'asset': 'assets/icons/tft.logo.png'},
-    {'id': 'wildrift', 'asset': 'assets/icons/wldrft.logo.png'},
-    {'id': 'marvel', 'asset': 'assets/icons/marvel.logo.png'},
-    {'id': 'freefire', 'asset': 'assets/icons/Frefire.logo.png'},
-=======
     {'id': 'hok', 'asset': 'assets/registro/hok.logo.png'},
     {'id': 'lol', 'asset': 'assets/registro/lol.logo.png'},
     {'id': 'mlbb', 'asset': 'assets/registro/mlbb.logo.png'},
@@ -35,7 +24,6 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
     {'id': 'wildrift', 'asset': 'assets/registro/wldrft.logo.png'},
     {'id': 'marvel', 'asset': 'assets/registro/marvel.logo.png'},
     {'id': 'freefire', 'asset': 'assets/registro/Frefire.logo.png'},
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
   ];
   final Set<String> _selectedGames = {};
 
@@ -70,11 +58,7 @@ class _RegisterStepThreeState extends State<RegisterStepThree> {
     Navigator.push(
       context,
       MaterialPageRoute(
-<<<<<<< HEAD
-        builder: (_) => RegisterStepFour(
-=======
         builder: (_) => StepFour(
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
           userData: {
             ...widget.userData,
             'juegosFavoritos': _selectedGames.isNotEmpty

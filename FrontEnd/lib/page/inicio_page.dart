@@ -1,37 +1,13 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-// Importa la página principal de comunidad si la necesitas para otro uso (sin alias)
-// import 'comunidad_page.dart';
-
-// Importa la página específica Mobile Legends con alias para evitar conflicto
-import 'juegos/mlbb_community_page.dart' as mlbb_page;
-=======
 import '../../Equipo/crear_equipo_page.dart';
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
+import '../widgets/Tags_page.dart';
 
 class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
 
-<<<<<<< HEAD
-  void _goToComunidad(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const mlbb_page.MlbbCommunityPage(),
-=======
   @override
   Widget build(BuildContext context) {
-    final tieneEquipo = true; // ← cámbialo luego por el dato real
-    final nombreEquipo = "Shadow Wolves";
-    final juegosFavoritos = [
-      'Riot',
-      'Shooter',
-      'MOBA',
-      'MLBB',
-      'LOL',
-      'Valorant',
-    ];
+    final tieneEquipo = true;
     final comunidades = ['Mobile Legends', 'League of Legends'];
 
     return Scaffold(
@@ -42,30 +18,40 @@ class InicioPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Sección de equipo
+              // ─── SECCIÓN DE EQUIPO ─────────────────────────────
               Container(
-                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.only(bottom: 24),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.15),
+                      blurRadius: 6,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      tieneEquipo ? nombreEquipo : 'Sin equipo',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    if (!tieneEquipo)
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 12),
+                        child: Text(
+                          "No tienes equipo",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
                     Row(
                       children: [
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              debugPrint("CLICK EN CREAR EQUIPO");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -78,18 +64,28 @@ class InicioPage extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              // Acción para unirse a equipo
+                            },
                             icon: const Icon(Icons.group_add),
                             label: const Text("Unirse a equipo"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
                             ),
                           ),
                         ),
@@ -99,9 +95,7 @@ class InicioPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 24),
-
-              // Torneos
+              // ─── TORNEOS ──────────────────────────────────────
               const Text(
                 "Torneos disponibles",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -121,23 +115,56 @@ class InicioPage extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Juegos
+              // ─── TAGS ─────────────────────────────────────────
               const Text(
-                "Tus juegos",
+                "Explorar por Tags",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: juegosFavoritos
-                    .map((tag) => Chip(label: Text(tag)))
+                spacing: 10,
+                runSpacing: 10,
+                children: tagList
+                    .map(
+                      (tag) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => tag.page),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: tag.color.withOpacity(0.05),
+                            border: Border.all(color: tag.color, width: 1.5),
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: tag.color.withOpacity(0.2),
+                                offset: const Offset(0, 2),
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            tag.label,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: tag.color,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
 
-              const SizedBox(height: 24),
-
-              // Comunidades
+              // ─── COMUNIDADES ──────────────────────────────────
               const Text(
                 "Comunidades",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -148,32 +175,18 @@ class InicioPage extends StatelessWidget {
                   leading: const Icon(Icons.videogame_asset),
                   title: Text(comunidad),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () {},
+                  onTap: () {
+                    // Acción para abrir comunidad
+                  },
                 ),
               ),
             ],
           ),
         ),
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
       ),
     );
   }
 
-<<<<<<< HEAD
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text('Inicio'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => _goToComunidad(context),
-          child: const Text('Ir a Comunidad Mobile Legends'),
-=======
   static Widget torneoBox(String title) {
     return Container(
       width: 140,
@@ -188,7 +201,6 @@ class InicioPage extends StatelessWidget {
           title,
           style: const TextStyle(color: Colors.white),
           textAlign: TextAlign.center,
->>>>>>> bebbbff (Progreso actual de registro y validaciones)
         ),
       ),
     );
