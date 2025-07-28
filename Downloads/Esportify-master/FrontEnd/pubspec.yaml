@@ -1,0 +1,75 @@
+name: esportefy
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Tipografía
+  google_fonts: ^4.0.3
+
+  # Speed dial
+  flutter_speed_dial: ^6.0.0
+
+  # Swipe actions (versión compatible con tu Flutter)
+  flutter_slidable: ^1.3.2
+
+  # Almacenamiento local
+  path_provider: ^2.0.15
+  path: ^1.8.4
+
+  # Internacionalización
+  flutter_localizations:
+    sdk: flutter
+
+  # Iconos iOS/Android
+  cupertino_icons: ^1.0.8
+
+  # Navegación
+  http: ^1.4.0
+  image_picker: ^1.1.2
+  qr_flutter: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/logos/DE.logo.png
+    - assets/loanding.gif
+    - assets/icons/wldrft.logo.png
+    - assets/icons/tft.logo.png
+    - assets/icons/sf6.logo.png
+    - assets/icons/mlbb..logo.png
+    - assets/icons/MK.logo.png
+    - assets/icons/marvel.logo.png
+    - assets/icons/lol...logo.png
+    - assets/icons/hok...logo.png
+    - assets/icons/Frefire.logo.png
+    - assets/pacman.gif
+    - assets/logos/DE.logo.png
+
+    - assets/logos/Fornite.jpg
+    - assets/logos/Honor.jpg
+    - assets/logos/mlbb.portada...jpg
+    - assets/logos/lol.portada.jpg
+    - assets/logos/wldrft.portada.jpg
+
+
+    - assets/comunidad/comunidad.hok.jpg
+    - assets/comunidad/comunidad.lol.jpg
+    - assets/comunidad/comunidad.mlbb.jpg
+    - assets/comunidad/comunidad.valo.jpeg
+    - assets/comunidad/comunidad.wild.jpeg
+    - assets/game/mlbb.game.png
+

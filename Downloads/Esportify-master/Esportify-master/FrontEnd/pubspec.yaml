@@ -56,6 +56,9 @@ flutter:
 
     - lib/assets/login/dawn esport.png
     - lib/assets/login/pacman.gif
+    - lib/assets/login/candado.gif
+    - lib/assets/login/correo.gif
+    - lib/assets/login/listo.gif
 
     - lib/assets/registro/Frefire.logo.png
     - lib/assets/registro/hok.logo.png
@@ -66,6 +69,13 @@ flutter:
     - lib/assets/registro/sf6.logo.png
     - lib/assets/registro/tft.logo.png
     - lib/assets/registro/wldrft.logo.png
+
+    - lib/assets/roles/birrete.png
+    - lib/assets/roles/corona.png
+    - lib/assets/roles/rama.png
+    - lib/assets/roles/fondoFem.png
+    - lib/assets/roles/fondoNovato.png
+    - lib/assets/roles/fondoUni.png
 
 
 

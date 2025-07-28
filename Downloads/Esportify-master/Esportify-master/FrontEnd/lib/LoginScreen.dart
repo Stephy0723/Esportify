@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'register/register_step_one.dart';
+import 'register/forgot_password_page.dart'; // NUEVA PESTAÑA
+import 'loading/LoadingScreen.dart';
 import 'page/home_page.dart';
-import 'data/connect_to_backend.dart'; // Importa tu ervicio
+import 'data/connect_to_backend.dart'; // Importa tu servicio
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,6 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
         const SnackBar(content: Text('Completa usuario y contraseña')),
       );
       return;
+    } else if (_isLoading) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ya se está procesando la solicitud')),
+      );
+      return;
     }
 
     setState(() => _isLoading = true);
@@ -33,7 +40,16 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response.statusCode == 200) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => const HomePage()),
+          MaterialPageRoute(
+            builder: (_) => LoadingScreen(
+              onLoadComplete: () async {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HomePage()),
+                );
+              },
+            ),
+          ),
         );
       } else {
         ScaffoldMessenger.of(
@@ -77,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Center(
                   child: Text(
-                    'Esportefy',
+                    'Esportify',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -129,7 +145,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      '¿Olvidaste tu contraseña?',
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 SizedBox(
                   height: 48,
                   child: ElevatedButton(

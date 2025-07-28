@@ -1,7 +1,8 @@
-// ... importaciones
 import 'package:flutter/material.dart';
 import '../verificacion/verificacion_jugador.dart';
 import '../verificacion/verificacion_coach.dart';
+import '../verificacion/verificacion_jugador_universitario.dart';
+import '../../data/countries.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -17,6 +18,11 @@ class _MobaFormState extends State<MobaForm> {
   String? juegoSeleccionado;
   File? logoEquipo;
   String qrData = '';
+
+  String tipoEquipo = "Masculino";
+  bool esUniversitario = false;
+  String? universidad;
+  String? paisSeleccionado;
 
   final List<String> juegosMOBA = [
     'Mobile Legends',
@@ -78,7 +84,13 @@ class _MobaFormState extends State<MobaForm> {
           const SizedBox(height: 25),
           _buildLogo(),
           const SizedBox(height: 25),
-          _buildSlogan(),
+          _buildNombreEquipo(),
+          const SizedBox(height: 25),
+          _buildTipoEquipo(),
+          const SizedBox(height: 25),
+          _buildUniversidad(),
+          const SizedBox(height: 25),
+          _buildPais(),
           const SizedBox(height: 30),
           _buildRoles("Titulares", ["EXP", "Gold", "Mid", "Jungla", "Roam"]),
           const SizedBox(height: 20),
@@ -97,7 +109,7 @@ class _MobaFormState extends State<MobaForm> {
           const SizedBox(height: 20),
           _buildGuardarQRButton(),
           const SizedBox(height: 30),
-          _buildOpcionesInvitacion(), // <<<<< ESTA ES LA SECCIÓN FINAL QUE PEDISTE
+          _buildOpcionesInvitacion(),
         ],
       ),
     );
@@ -124,11 +136,9 @@ class _MobaFormState extends State<MobaForm> {
             iconEnabledColor: Colors.white,
             decoration: const InputDecoration(border: InputBorder.none),
             style: const TextStyle(color: Colors.white),
-            items: juegosMOBA
-                .map(
-                  (juego) => DropdownMenuItem(value: juego, child: Text(juego)),
-                )
-                .toList(),
+            items: juegosMOBA.map((juego) {
+              return DropdownMenuItem(value: juego, child: Text(juego));
+            }).toList(),
             onChanged: (val) => setState(() => juegoSeleccionado = val),
           ),
         ),
@@ -165,11 +175,11 @@ class _MobaFormState extends State<MobaForm> {
     );
   }
 
-  Widget _buildSlogan() {
+  Widget _buildNombreEquipo() {
     return TextField(
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        hintText: 'Eslogan del equipo',
+        hintText: 'Nombre del equipo',
         hintStyle: const TextStyle(color: Colors.white54),
         filled: true,
         fillColor: Colors.grey[900],
@@ -178,6 +188,112 @@ class _MobaFormState extends State<MobaForm> {
           borderSide: BorderSide.none,
         ),
       ),
+    );
+  }
+
+  Widget _buildTipoEquipo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("Tipo de equipo:", style: TextStyle(color: Colors.white70)),
+        const SizedBox(height: 10),
+        Wrap(
+          spacing: 10,
+          children: ["Masculino", "Femenino", "Mixto"].map((opcion) {
+            final isSelected = tipoEquipo == opcion;
+            return ChoiceChip(
+              label: Text(opcion),
+              selected: isSelected,
+              onSelected: (_) => setState(() => tipoEquipo = opcion),
+              selectedColor: Colors.white,
+              labelStyle: TextStyle(
+                color: isSelected ? Colors.black : Colors.white,
+              ),
+              backgroundColor: Colors.grey[800],
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildUniversidad() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "¿Es un equipo universitario?",
+          style: TextStyle(color: Colors.white70),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            _buildRadioOpcion("Sí", true),
+            const SizedBox(width: 10),
+            _buildRadioOpcion("No", false),
+          ],
+        ),
+        if (esUniversitario) ...[
+          const SizedBox(height: 12),
+          TextField(
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              hintText: "Nombre de la universidad",
+              hintStyle: const TextStyle(color: Colors.white54),
+              filled: true,
+              fillColor: Colors.grey[900],
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+            onChanged: (val) => universidad = val,
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildRadioOpcion(String label, bool value) {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: () => setState(() => esUniversitario = value),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: esUniversitario == value
+              ? Colors.white
+              : Colors.grey[850],
+          foregroundColor: esUniversitario == value
+              ? Colors.black
+              : Colors.white,
+        ),
+        child: Text(label),
+      ),
+    );
+  }
+
+  Widget _buildPais() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("País del equipo:", style: TextStyle(color: Colors.white70)),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<String>(
+          value: paisSeleccionado,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.grey[900],
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          dropdownColor: Colors.grey[900],
+          iconEnabledColor: Colors.white,
+          style: const TextStyle(color: Colors.white),
+          items: latinAmericanCountries
+              .map((pais) => DropdownMenuItem(value: pais, child: Text(pais)))
+              .toList(),
+
+          onChanged: (value) => setState(() => paisSeleccionado = value),
+        ),
+      ],
     );
   }
 
@@ -200,14 +316,21 @@ class _MobaFormState extends State<MobaForm> {
               children: [
                 GestureDetector(
                   onTap: () async {
+                    Widget formulario;
+
+                    if (isCoach) {
+                      formulario = const VerificacionCoachForm();
+                    } else if (esUniversitario) {
+                      formulario = const VerificacionJugadorUniversitarioForm();
+                    } else {
+                      formulario = const VerificacionJugadorForm();
+                    }
+
                     await Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => isCoach
-                            ? const VerificacionCoachForm()
-                            : const VerificacionJugadorForm(),
-                      ),
+                      MaterialPageRoute(builder: (_) => formulario),
                     );
+
                     verificar(rol);
                   },
                   child: CircleAvatar(
@@ -240,7 +363,6 @@ class _MobaFormState extends State<MobaForm> {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          // Aquí podrías guardar la información del equipo si usas base de datos
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Equipo guardado correctamente"),
@@ -265,21 +387,19 @@ class _MobaFormState extends State<MobaForm> {
     return Column(
       children: [
         const Divider(height: 40, color: Colors.white24),
-        _buildOpcionInvitacion(Icons.share, "Enviar invitación por enlace", () {
-          // Acción de compartir enlace
-        }),
+        _buildOpcionInvitacion(
+          Icons.share,
+          "Enviar invitación por enlace",
+          () {},
+        ),
         const SizedBox(height: 10),
         _buildOpcionInvitacion(
           Icons.qr_code,
           "Enviar invitación por código QR",
-          () {
-            // Acción de mostrar QR
-          },
+          () {},
         ),
         const SizedBox(height: 10),
-        _buildOpcionInvitacion(Icons.search, "Buscar por nombre", () {
-          // Acción de búsqueda
-        }),
+        _buildOpcionInvitacion(Icons.search, "Buscar por nombre", () {}),
       ],
     );
   }

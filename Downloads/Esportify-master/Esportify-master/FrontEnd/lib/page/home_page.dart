@@ -4,8 +4,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../widgets/custom_navbar.dart';
 import 'inicio_page.dart';
 import 'comunidad_page.dart';
-import 'torneos_page.dart';
-import 'clases_pro_page.dart';
 import '../configuracion/configuracion_page.dart';
 import 'chat_general_page.dart';
 import 'transmision_page.dart';
@@ -22,10 +20,8 @@ class _HomePageState extends State<HomePage> {
   static final _pages = [
     const InicioPage(), // index 0
     const ComunidadPage(), // index 1
-    const TorneosPage(), // index 2
-    const ClasesProPage(), // index 3
-    const TransmisionPage(), // index 4
-    const ConfiguracionPage(), // index 5
+    const TransmisionPage(), // index 2
+    const ConfiguracionPage(), // index 3
   ];
 
   @override

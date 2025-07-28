@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.8:5000/api/users';
+  static const String baseUrl = 'http://192.168.0.102:5000/api/users';
 
   static Future<Map<String, dynamic>> checkUsernameAvailability(
     String username,
