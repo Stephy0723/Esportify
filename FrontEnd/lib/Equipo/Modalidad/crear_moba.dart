@@ -29,7 +29,7 @@ class _MobaFormState extends State<MobaForm> {
     'League of Legends',
     'Wild Rift',
     'Arena of Valor',
-    'Pokémon Unite',
+    'Pokemon Unite',
   ];
 
   Map<String, bool> verificados = {
@@ -71,7 +71,7 @@ class _MobaFormState extends State<MobaForm> {
         children: [
           Center(
             child: Text(
-              equipoVerificado ? "✅ Equipo Verificado" : "Crear equipo MOBA",
+              equipoVerificado ? "Equipo Verificado" : "Crear equipo MOBA",
               style: TextStyle(
                 color: equipoVerificado ? Colors.green : Colors.white,
                 fontSize: 20,

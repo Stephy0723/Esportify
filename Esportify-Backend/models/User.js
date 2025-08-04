@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({ 
+const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -12,20 +12,22 @@ const userSchema = new mongoose.Schema({
   provincia: { type: String, required: true },
 
   perteneceEquipo: { type: Boolean, default: false },
-  nombreEquipo: { type: String},
+  equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },  // Relación
   rolEnEquipo: { type: String },
-  haParticipadoTorneos: { type: Boolean, default: false },
-  nombreTorneo: { type: String },
-  fechaTorneo: { type: Date },
 
-  juegosFavoritos: { type: String, enum: ['lol', 'hok', 'mlbb','mk','sf6','tft','wildrift','marvel','freefire'], required: true},
-  plataformas: { type: String, enum: ['PC', 'PS4', 'Xbox','Switch', 'Móvil'], required: true },
+  torneos: [{  // Historial de torneos
+    nombre: { type: String },
+    fecha: { type: Date }
+  }],
+
+  juegosFavoritos: [{ type: String, enum: ['lol', 'hok', 'mlbb', 'mk', 'sf6', 'tft', 'wildrift', 'marvel', 'freefire'], required: true }],
+  plataformas: [{ type: String, enum: ['PC', 'PS4', 'Xbox', 'Switch', 'Móvil'] }],
   juegoPersonalizado: { type: String, default: 'Ninguno' },
 
   aceptaTerminos: { type: Boolean, default: false },
-  aceptaPrivacidad:{ type: Boolean, default: false },
+  aceptaPrivacidad: { type: Boolean, default: false },
   notificaciones: { type: Boolean, default: true },
 
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

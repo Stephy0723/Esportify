@@ -19,11 +19,7 @@ class TagItem {
 
 final List<TagItem> tagList = [
   TagItem(label: '#5vs5', color: Colors.blue, page: const Tag5vs5Page()),
-  TagItem(
-    label: '#Riot Game',
-    color: Colors.red,
-    page: const TagRiotGamePage(),
-  ),
+  TagItem(label: '#RiotGame', color: Colors.red, page: const TagRiotGamePage()),
   TagItem(label: '#Moba', color: Colors.green, page: const TagMobaPage()),
   TagItem(
     label: '#Competitivo',
@@ -42,7 +38,7 @@ final List<TagItem> tagList = [
   ),
   TagItem(label: '#MLBB', color: Colors.pink, page: const TagMlbbPage()),
   TagItem(
-    label: '#Honor Of King',
+    label: '#HonorOfKing',
     color: Colors.deepPurple,
     page: const TagHonorOfKingPage(),
   ),
