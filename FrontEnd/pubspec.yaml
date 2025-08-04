@@ -78,4 +78,13 @@ flutter:
     - lib/assets/roles/fondoUni.png
 
 
+    - lib/assets/tags/riotGame/Wild.png
+    - lib/assets/tags/riotGame/lol(2).png
+    - lib/assets/tags/riotGame/valo.png
+    - lib/assets/tags/riotGame/tft.png
+    - lib/assets/tags/riotGame/riotgame.png
+    - lib/assets/tags/riotGame/herEmpire.png
+
+
+
 
