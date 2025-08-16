@@ -24,16 +24,38 @@ const mobaTeamSchema = new mongoose.Schema({
     },
 
     universitario: { type: Boolean, default: false },
-    universidad: { type: String, default: '' },
+    universidad: { type: String, default: '', required: true },
 
-    teamCountrys: { type: String, enum: ['Argentina', 'Chile', 'Colombia', 'Perú', 'México'], default: '' },
+    teamCountrys: {
+        type: String, enum: [
+            'Argentina',
+            'Bolivia',
+            'Brasil',
+            'Chile',
+            'Colombia',
+            'Costa Rica',
+            'Cuba',
+            'República Dominicana',
+            'Ecuador',
+            'El Salvador',
+            'Guatemala',
+            'Honduras',
+            'Mexico',
+            'Nicaragua',
+            'Panama',
+            'Paraguay',
+            'Peru',
+            'Uruguay',
+            'Venezuela',
+        ], required: true
+    },
 
 
-    exp: {type: mongoose.Schema.Types.ObjectId, ref: 'Titular'}, // Experiencia del equipo
-    gold: {type: mongoose.Schema.Types.ObjectId, ref: 'Titular'}, // Oro del equipo
-    mid: {type: mongoose.Schema.Types.ObjectId, ref: 'Titular'}, // Mid del equipo
-    jungla: {type: mongoose.Schema.Types.ObjectId, ref: 'Titular'}, // Jungla del equipo
-    roam: {type: mongoose.Schema.Types.ObjectId, ref: 'Titular'}, // Roam del equipo
+    exp: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Experiencia del equipo
+    gold: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Oro del equipo
+    mid: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Mid del equipo
+    jungla: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Jungla del equipo
+    roam: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Roam del equipo
 
     suplente1: [{
         type: mongoose.Schema.Types.ObjectId,

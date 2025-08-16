@@ -60,4 +60,55 @@ class ApiService {
       throw Exception('Error connecting to the backend: $e');
     }
   }
+
+  static Future<http.Response> getUserProfile(String userId) async {
+    final url = Uri.parse('$baseUrl/profile/$userId');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to fetch user profile: ${response.body}');
+    }
+  }
+
+  static Future<http.Response> updateUserProfile(
+    String userId,
+    Map<String, dynamic> profileData,
+  ) async {
+    final url = Uri.parse('$baseUrl/profile/$userId');
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(profileData),
+    );
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to update user profile: ${response.body}');
+    }
+  }
+
+  static Future<http.Response> deleteUser(String userId) async {
+    final url = Uri.parse('$baseUrl/delete/$userId');
+    final response = await http.delete(url);
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to delete user: ${response.body}');
+    }
+  }
+
+  static Future<http.Response> getAllUsers() async {
+    final url = Uri.parse('$baseUrl/all');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to fetch all users: ${response.body}');
+    }
+  }
 }

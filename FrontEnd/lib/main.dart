@@ -1,6 +1,7 @@
+// import 'package:esportefy/WelcomeScreen.dart';
+import 'package:esportefy/page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'page/home_page.dart'; // <- Importación corregida
 
 void main() {
   runApp(const EsportefyApp());
