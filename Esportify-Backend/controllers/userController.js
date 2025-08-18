@@ -1,9 +1,11 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {v4: uuidv4} = require('uuid');
-const {getTemplate} = require('../config/mail.config');
-const {sendEmail} = require('../config/mail.config');
+const { v4: uuidv4 } = require('uuid');
+const { getTemplate } = require('../config/mail.config');
+const { sendEmail } = require('../config/mail.config');
+
+
 exports.register = async (req, res) => {
   try {
     const {
@@ -34,11 +36,14 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const tokenConfirm = uuidv4(); // Genera un token único
+
     const newUser = new User({
       username,
       name,
       email,
       password: hashedPassword,
+      tokenConfirm: tokenConfirm, // Guarda el token de confirmación generado
       fechaNacimiento,
       genero,
       pais,
@@ -57,14 +62,13 @@ exports.register = async (req, res) => {
       notificaciones,
     });
 
-    const tokenConfirm = uuidv4(); // Genera un token único
     const emailTemplate = getTemplate(name, tokenConfirm);
     await sendEmail(email, 'Confirma tu cuenta en Esportify', emailTemplate);
 
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id, username: newUser.username }, process.env.JWT_SECRET, 
-      {expiresIn: '2h'});
+    const token = jwt.sign({ id: newUser._id, username: newUser.username }, process.env.JWT_SECRET,
+      { expiresIn: '2h' });
 
     res.status(201).json({ token, userId: newUser._id });
   } catch (error) {
@@ -191,16 +195,104 @@ exports.deleteUserProfile = async (req, res) => {
 exports.confirmEmail = async (req, res) => {
   const { token } = req.params;
   try {
-    const user = await User.findOne({ confirmationToken: token });
+    const user = await User.findOne({ tokenConfirm: token });
     if (!user) {
-      return res.status(400).json({ message: 'Token de confirmación inválido' });
+      return res.status(400).send(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Token inválido</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: inline-block;
+      padding: 40px 60px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #dc3545;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>❌ Token de confirmación inválido</h1>
+    <p>El enlace que usaste no es válido o ya ha sido utilizado.</p>
+    <p>Si crees que esto es un error, por favor solicita un nuevo correo de confirmación.</p>
+  </div>
+</body>
+</html>
+
+        `);
     }
     user.status = 'VERIFIED';
-    user.confirmationToken = undefined;
+    user.tokenConfirm = undefined;
     await user.save();
-    return res.status(200).json({ message: 'Correo confirmado con éxito' });
+    return res.status(200).send(`
+        <html>
+          <head><title>Confirmación</title></head>
+          <body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+            <h1>✅ Correo validado con éxito</h1>
+            <p>Gracias por confirmar tu cuenta en <strong>Esportify</strong>.</p>
+          </body>
+        </html>
+      `);
+
   } catch (error) {
     console.error('Error al confirmar el correo:', error);
-    return res.status(500).json({ message: 'Error interno del servidor' });
+    return res.status(500).send(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Error del servidor</title>
+  <style>
+    body {
+      background-color: #fff3f3;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .container {
+      background-color: #ffffff;
+      border: 1px solid #f5c2c7;
+      border-radius: 8px;
+      display: inline-block;
+      padding: 40px 60px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #dc3545;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚠️ Error interno del servidor</h1>
+    <p>Ocurrió un problema al confirmar tu correo electrónico.</p>
+    <p>Por favor, intenta nuevamente más tarde o contacta al soporte técnico.</p>
+  </div>
+</body>
+</html>      
+      `)
   }
 };
