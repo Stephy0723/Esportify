@@ -7,7 +7,9 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/check-user', userController.checkUserExists);
 router.get('/confirmEmail/:token', userController.confirmEmail);
-/*router.post('/forgot-password', userController.forgotPassword);//Aun  no esta implementado, pero se utilizara para enviar un email de recuperacion de contraseña*/
+router.post('/send-Reset-Code', userController.sendResetCode);
+router.post('/forgot-password', userController.forgotPassword);
+
 
 router.get('/profile', auth, userController.getUserProfile);
 router.put('/profile', auth, userController.updateUserProfile);

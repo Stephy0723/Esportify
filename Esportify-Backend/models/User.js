@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   status: {type: String, required: true, default: 'UNVERIFIED'},
   tokenConfirm: { type: String, default: null }, // Token de confirmación
   password: { type: String, required: true },
-
+  resetCode: {  type: String,  default: null  }, // Código de restablecimiento de contraseña
+  resetCodeExpires: { type: Date, default: null }, // Fecha de expiración del código de restablecimiento
 
   fechaNacimiento: { type: Date, required: true },
   genero: { type: String, enum: ['Masculino', 'Femenino', 'Otro'], default: 'Masculino', required: true },

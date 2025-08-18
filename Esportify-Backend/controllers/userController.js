@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const { getTemplate } = require('../config/mail.config');
 const { sendEmail } = require('../config/mail.config');
@@ -292,7 +293,51 @@ exports.confirmEmail = async (req, res) => {
     <p>Por favor, intenta nuevamente más tarde o contacta al soporte técnico.</p>
   </div>
 </body>
-</html>      
+</html>    
       `)
+  }
+};
+
+exports.sendResetCode = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+
+    const code = crypto.randomBytes(3).toString('hex').toUpperCase(); // Ej: 'A1B2C3'
+    user.resetCode = code;
+    user.resetCodeExpires = Date.now() + 10 * 60 * 1000; // 10 minutos
+    await user.save();
+    const emailTemplate = `
+      <p>Tu código para recuperar la contraseña es: <strong>${code}</strong></p>
+      <p>Este código es válido por 10 minutos.</p>
+    `;
+    await sendEmail(email, 'Código de recuperación', emailTemplate);
+
+    res.status(200).json({ message: 'Código enviado al correo' });
+  } catch (error) {
+    console.error('Error al enviar código:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
+exports.forgotPassword = async (req, res) => {
+  const { email, code, newPassword } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user || user.resetCode !== code || Date.now() > user.resetCodeExpires) {
+      console.log('Código inválido o expirado');
+      return res.status(400).json({ message: 'Código inválido o expirado' });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.resetCode = null;
+    user.resetCodeExpires = null;
+    await user.save();
+
+    res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+  } catch (error) {
+    console.error('Error al cambiar contraseña:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
   }
 };

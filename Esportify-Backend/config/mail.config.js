@@ -52,4 +52,5 @@ const getTemplate = (name, token) => {
 </html>`;
 }
 
+
 module.exports = { sendEmail, getTemplate };
