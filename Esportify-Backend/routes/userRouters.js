@@ -7,8 +7,10 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/check-user', userController.checkUserExists);
 router.get('/confirmEmail/:token', userController.confirmEmail);
+
 router.post('/send-Reset-Code', userController.sendResetCode);
-router.post('/forgot-password', userController.forgotPassword);
+router.post('/validate-ResetCode', userController.validateResetCode);
+router.post('/change-password', userController.changePassword);
 
 
 router.get('/profile', auth, userController.getUserProfile);

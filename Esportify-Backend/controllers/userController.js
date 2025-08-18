@@ -304,7 +304,7 @@ exports.sendResetCode = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-    const code = crypto.randomBytes(3).toString('hex').toUpperCase(); // Ej: 'A1B2C3'
+    const code = crypto.randomBytes(2).toString('hex').toUpperCase(); // Ej: 'A1B2C3'
     user.resetCode = code;
     user.resetCodeExpires = Date.now() + 10 * 60 * 1000; // 10 minutos
     await user.save();
@@ -321,23 +321,43 @@ exports.sendResetCode = async (req, res) => {
   }
 };
 
-exports.forgotPassword = async (req, res) => {
-  const { email, code, newPassword } = req.body;
+exports.validateResetCode = async (req, res) => {
+  const { email, code } = req.body;
+
   try {
     const user = await User.findOne({ email });
-    if (!user || user.resetCode !== code || Date.now() > user.resetCodeExpires) {
-      console.log('Código inválido o expirado');
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const isCodeValid = user.resetCode === code && Date.now() < user.resetCodeExpires;
+
+    if (!isCodeValid) {
       return res.status(400).json({ message: 'Código inválido o expirado' });
     }
 
-    user.password = await bcrypt.hash(newPassword, 10);
-    user.resetCode = null;
-    user.resetCodeExpires = null;
-    await user.save();
-
-    res.status(200).json({ message: 'Contraseña actualizada con éxito' });
+    res.status(200).json({ message: 'Código válido' });
   } catch (error) {
-    console.error('Error al cambiar contraseña:', error);
+    console.error('Error al validar código:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 };
+
+exports.changePassword = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {  
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+    res.status(200).json({ message: 'Contraseña cambiada' });
+  } catch (error) {
+    console.error('Error al cambiar la contraseña:', error);
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+}; 
