@@ -134,7 +134,7 @@ exports.checkUserExists = async (req, res) => {
 exports.getUserProfile = async (req, res) => {
   try {
     const userId = req.user._id; // O req.query.userId si usas query
-    const user = await User.findById(userId)
+    const user = await User.findById(userId).select("-password")
       .populate('equipo', 'name image slogan') // Popula el equipo con campos específicos
       .select('-password'); // Excluye la contraseña del resultado
 

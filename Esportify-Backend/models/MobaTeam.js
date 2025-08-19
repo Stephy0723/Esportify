@@ -23,8 +23,12 @@ const mobaTeamSchema = new mongoose.Schema({
         required: true,
     },
 
-    universitario: { type: Boolean, default: false },
-    universidad: { type: String, default: '', required: true },
+    universitary: { type: Boolean, default: false },
+    universidad: {
+        type: String, default: '', required: function () {
+            return this.universitary === true
+        }
+    },
 
     teamCountrys: {
         type: String, enum: [
@@ -50,26 +54,26 @@ const mobaTeamSchema = new mongoose.Schema({
         ], required: true
     },
 
-
-    exp: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Experiencia del equipo
-    gold: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Oro del equipo
-    mid: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Mid del equipo
-    jungla: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Jungla del equipo
-    roam: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Roam del equipo
-
-    suplente1: [{
+    titular: {
+        exp: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Experiencia del equipo
+        gold: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Oro del equipo
+        mid: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Mid del equipo
+        jungla: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Jungla del equipo
+        roam: { type: mongoose.Schema.Types.ObjectId, ref: 'Titular' }, // Roam del equipo
+    },
+    suplentes: {
+        suplente1: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Sustituto',
+        }],
+        suplente2: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Sustituto',
     }],
-    suplente2: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Sustituto',
-    }],
-
+    },
     coach: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Coach',
-        required: true,
     }
 }, { timestamps: true });
 
