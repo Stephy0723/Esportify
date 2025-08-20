@@ -1,0 +1,90 @@
+name: esportefy
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  qr_flutter: ^4.0.0
+  screenshot: ^1.3.0
+  image_picker: ^1.0.4
+
+
+  # Tipografía
+  google_fonts: ^4.0.3
+
+  # Speed dial
+  flutter_speed_dial: ^6.0.0
+
+  # Swipe actions (versión compatible con tu Flutter)
+  flutter_slidable: ^1.3.2
+
+  # Almacenamiento local
+  path_provider: ^2.0.15
+  path: ^1.8.4
+
+  # Internacionalización
+  flutter_localizations:
+    sdk: flutter
+
+  # Iconos iOS/Android
+  cupertino_icons: ^1.0.8
+
+  # Navegación
+  http: ^1.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+
+    - lib/assets/roles/exp.line.png
+    - lib/assets/roles/gold.lane.png
+    - lib/assets/roles/jungle.lane.png
+    - lib/assets/roles/mid.lane.png
+    - lib/assets/roles/roam.lane.png
+
+    - lib/assets/login/dawn esport.png
+    - lib/assets/login/pacman.gif
+    - lib/assets/login/candado.gif
+    - lib/assets/login/correo.gif
+    - lib/assets/login/listo.gif
+
+    - lib/assets/registro/Frefire.logo.png
+    - lib/assets/registro/hok.logo.png
+    - lib/assets/registro/lol.logo.png
+    - lib/assets/registro/marvel.logo.png
+    - lib/assets/registro/MK.logo.png
+    - lib/assets/registro/mlbb.logo.png
+    - lib/assets/registro/sf6.logo.png
+    - lib/assets/registro/tft.logo.png
+    - lib/assets/registro/wldrft.logo.png
+
+    - lib/assets/roles/birrete.png
+    - lib/assets/roles/corona.png
+    - lib/assets/roles/rama.png
+    - lib/assets/roles/fondoFem.png
+    - lib/assets/roles/fondoNovato.png
+    - lib/assets/roles/fondoUni.png
+
+
+    - lib/assets/tags/riotGame/Wild.png
+    - lib/assets/tags/riotGame/lol(2).png
+    - lib/assets/tags/riotGame/valo.png
+    - lib/assets/tags/riotGame/tft.png
+    - lib/assets/tags/riotGame/riotgame.png
+    - lib/assets/tags/riotGame/herEmpire.png
+
+
+
+
