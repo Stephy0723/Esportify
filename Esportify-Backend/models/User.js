@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   }],
 
   juegosFavoritos: [{ type: String, enum: ['lol', 'hok', 'mlbb', 'mk', 'sf6', 'tft', 'wildrift', 'marvel', 'freefire'], required: true }],
-  plataformas: [{ type: String, enum: ['PC', 'PS4', 'Xbox', 'Switch', 'Móvil'] }],
+  plataformas: [{ type: String, enum: ['PC', 'PlayStation', 'Xbox', 'Switch', 'Móvil'] }],
   juegoPersonalizado: { type: String, default: 'Ninguno' },
 
   aceptaTerminos: { type: Boolean, default: false },
