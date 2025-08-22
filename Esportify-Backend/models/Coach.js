@@ -1,13 +1,13 @@
-const mogoose = require('mongoose');
+const mongoose = require('mongoose');
 
-const coachSchema = new mogoose.Schema({
-    fullname: { type: String, required: true },
-    cedula: {type: String, required: true, unique: true },
-    expage: { type: Number, required: true }, // Años de experiencia
-    teamsexperience: { type: Number, required: true }, // Experiencia con equipos
-    createImageBitmap: { type: String }, // URL de la imagen del coach
-    phoneNumber: { type: String, required: true }, // Número de teléfono del coach
-    prophoto: {type: String, required: true}, // Foto profesional del coach
+const CoachSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    id: {type: String, required: true},
+    experienceAge: {type: Number, required: true},
+    lastTeam: {type: String, required: true},
+    certifications: [{type: String}],
+    number: {type: Number, required: true},
+    image: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Coach', coachSchema);
+module.exports = mongoose.model('Coach', CoachSchema);

@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   provincia: { type: String, required: true },
 
   perteneceEquipo: { type: Boolean, default: false },
-  equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },  // Relación
+  equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
   rolEnEquipo: { type: String },
 
   torneos: [{  // Historial de torneos
@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
   juegosFavoritos: [{ type: String, enum: ['lol', 'hok', 'mlbb', 'mk', 'sf6', 'tft', 'wildrift', 'marvel', 'freefire'], required: true }],
   plataformas: [{ type: String, enum: ['PC', 'PlayStation', 'Xbox', 'Switch', 'Móvil'] }],
   juegoPersonalizado: { type: String, default: 'Ninguno' },
+
+// Campos universitarios
+  esUniversitario: { type: Boolean, default: false },
+  universidad: { type: String, default: '' },
+  carrera: { type: String, default: '' },
+  matricula: { type: String, default: '' }, // número de estudiante o registro
 
   aceptaTerminos: { type: Boolean, default: false },
   aceptaPrivacidad: { type: Boolean, default: false },
