@@ -9,7 +9,9 @@ import 'chat_general_page.dart';
 import 'transmision_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  /*final String nombre; // Esto lo dejo como ejemplo de pasar datos entre pantallas
+  final String userId;*/
+  const HomePage({/*required this.nombre, required this.userId,*/super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
