@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onLoadComplete: () async {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => const HomePage()),
+                  MaterialPageRoute(builder: (_) => HomePage()),
                 );
               },
             ),

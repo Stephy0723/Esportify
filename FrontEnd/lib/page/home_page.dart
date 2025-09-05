@@ -9,9 +9,8 @@ import 'chat_general_page.dart';
 import 'transmision_page.dart';
 
 class HomePage extends StatefulWidget {
-  /*final String nombre; // Esto lo dejo como ejemplo de pasar datos entre pantallas
-  final String userId;*/
-  const HomePage({/*required this.nombre, required this.userId,*/super.key});
+
+  const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -23,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     const InicioPage(), // index 0
     const ComunidadPage(), // index 1
     const TransmisionPage(), // index 2
-    const ConfiguracionPage(), // index 3
+    const ConfiguracionPage()// index 3
   ];
 
   @override
@@ -56,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               labelStyle: const TextStyle(fontSize: 14),
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const ChatGeneralPage()),
+                MaterialPageRoute(builder: (_) =>  ChatGeneralPage()),
               ),
             ),
             SpeedDialChild(

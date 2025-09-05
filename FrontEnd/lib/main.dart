@@ -1,5 +1,5 @@
 // import 'package:esportefy/WelcomeScreen.dart';
-import 'package:esportefy/page/home_page.dart';
+import 'package:esportefy/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -22,7 +22,7 @@ class EsportefyApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale('es', 'ES'), Locale('en', 'US')],
       theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF2F2F2)),
-      home: const HomePage(), // <- Aquí se inicia ahora
+      home: const WelcomeScreen(), // <- Aquí se inicia ahora
     );
   }
 }
