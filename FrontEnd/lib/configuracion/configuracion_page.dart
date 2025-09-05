@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfiguracionPage extends StatefulWidget {
   const ConfiguracionPage({super.key});
@@ -8,7 +9,7 @@ class ConfiguracionPage extends StatefulWidget {
 }
 
 class _ConfiguracionPageState extends State<ConfiguracionPage> {
-  final String username = 'Celestial22';
+  String username = '';
   final String userId = '#000123';
   final String estado =
       'offline'; // puedes cambiar entre: offline, online, tournament
@@ -19,6 +20,22 @@ class _ConfiguracionPageState extends State<ConfiguracionPage> {
     'Organizador': false,
     'Creador de contenido': false,
   };
+
+  @override
+  void initState() {
+    super.initState();
+    cargarDatosUsuario();
+  }
+
+  Future<void> cargarDatosUsuario() async {// Carga el nombre de usuario desde SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    final nombre = prefs.getString('username') ?? 'Usuario';
+    final token = prefs.getString('jwt_token');
+
+    setState(() {
+      username = nombre;
+    });
+  }
 
   void _solicitarRol(String rol) {
     showDialog(

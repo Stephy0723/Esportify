@@ -4,6 +4,8 @@ import 'register/forgot_password_page.dart'; // NUEVA PESTAÑA
 import 'loading/LoadingScreen.dart';
 import 'page/home_page.dart';
 import 'data/connect_to_backend.dart'; // Importa tu servicio
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,6 +40,14 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final response = await ApiService.loginUser(user, pass);
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final token = data['token'];
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('jwt_token', token);
+        await prefs.setString('username', data['username']);
+        /*await prefs.setString('email', data['email']);*/
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
