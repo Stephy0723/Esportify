@@ -361,3 +361,18 @@ exports.changePassword = async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor' });
   }
 }; 
+
+// buscar usuarios por nombre de usuario
+exports.searchUsers = async (req, res) => {
+  const { username } = req.query; // Obtener el nombre de usuario desde los parámetros de consulta
+  try {
+    const users = await User.find({
+      username: { $regex: username, $options: 'i' } // Búsqueda insensible a mayúsculas/minúsculas
+    }).select('username name email'); // Seleccionar solo campos específicos para devolver  
+    res.status(200).json(users);
+    
+  } catch (error) {
+    console.error('Error al buscar usuarios:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  } 
+};

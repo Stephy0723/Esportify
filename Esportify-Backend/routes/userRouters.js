@@ -7,6 +7,7 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/check-user', userController.checkUserExists);
 router.get('/confirmEmail/:token', userController.confirmEmail);
+router.get('/searchUsers', userController.searchUsers);
 
 router.post('/send-Reset-Code', userController.sendResetCode);
 router.post('/validate-ResetCode', userController.validateResetCode);
