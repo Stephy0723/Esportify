@@ -1,5 +1,5 @@
 const User = require('../models/User');// Debes tener este modelo
-const Team = require('../models/MobaTeam');
+const Team = require('../models/Team');
 
 exports.getMainPageData = async (req, res) => {
     try {

@@ -1,24 +1,23 @@
-const Team = require('../models/MobaTeam');
+const Team = require('../models/Team');
 const User = require('../models/User');
 
 exports.createTeam = async (req, res) => {
     try {
-        const { game, mobaGames, image, slogan, teamGender, universitario, universidad, teamCountrys, coach } = req.body;
+        const { game, image, name, teamGender, universitario, universidad, teamCountrys, coach } = req.body;
 
-        const existingteam = await Team.findOne({ slogan });
+        const existingteam = await Team.findOne({ name });
         if (existingteam) {
             return res.status(400).json({ messege: 'El nombre del equipo ya existe.' });
         }
 
         const team = new Team({
             game,
-            mobaGames,
             image,
-            slogan,
+            name,
             teamGender,
             universitario: universitario ?? false,
             universidad: universidad ?? '',
-            teamCountrys: teamCountrys ?? '',
+            teamCountrys,
             coach: coach ?? null,
         });
 
@@ -38,40 +37,6 @@ exports.createTeam = async (req, res) => {
 
 exports.joinTeam = async (req, res) => {
     try {
-        const { teamId, rol } = req.body;
-
-        const team = await Team.findById(teamId);
-        if (!team) {
-            return res.status(404).json({ messege: 'Equipo no encontrado.' });
-        }
-
-        // Verifica si el usuario ya ocupa ese rol
-        if (team[rol] && Array.isArray(team[rol]) ? team[rol].includes(req.user._id) : team[rol]?.toString() === req.user._id.toString()) {
-            return res.status(400).json({ messege: 'Ya eres parte de este equipo.' });
-        }
-
-        // Validación para suplentes (máximo 1 por campo)
-        if (rol === 'suplente1' || rol === 'suplente2') {
-            if (team[rol].length >= 1) {
-                return res.status(400).json({ messege: 'El rol de suplente ya está ocupado.' });
-            }
-            team[rol].push(req.user._id);
-        } else {
-            // Validación para titulares y coach (solo uno por rol)
-            if (team[rol]) {
-                return res.status(400).json({ messege: `El rol ${rol} ya está ocupado.` });
-            }
-            team[rol] = req.user._id;
-        }
-        await team.save();
-
-        await User.findByIdAndUpdate(req.user._id, {
-            perteneceEquipo: true,
-            equipo: team._id,
-            rolEnEquipo: rol
-        });
-
-        res.status(200).json({ messege: 'Te has unido al equipo con exito.', team });
 
     } catch (error) {
         console.error(error);
@@ -88,7 +53,6 @@ exports.leaveTeam = async (req, res) => {
             return res.status(404).json({ messege: 'No estás en ningún equipo.' });
         }
 
-        // Elimina al usuario del equipo
         for (const role of ['top', 'jungle', 'mid', 'adc', 'support', 'coach', 'suplente1', 'suplente2']) {
             if (Array.isArray(team[role])) {
                 team[role] = team[role].filter(id => id.toString() !== userId.toString());
@@ -99,7 +63,6 @@ exports.leaveTeam = async (req, res) => {
 
         await team.save();
 
-        // Actualiza el usuario
         await User.findByIdAndUpdate(userId, {
             perteneceEquipo: false,
             equipo: null,

@@ -34,12 +34,12 @@ google-services.json
 *.hprof
 
 # Node.js backend
-Esportify-Backend/node_modules/
-Esportify-Backend/.env
-Esportify-Backend/dist/
-Esportify-Backend/coverage/
-Esportify-Backend/npm-debug.log*
-Esportify-Backend/yarn-error.log*
-Esportify-Backend/*.log
-Esportify-Backend/.DS_Store
-Esportify-Backend/.vscode/
+node_modules/
+dist/
+coverage/
+npm-debug.log*
+yarn-error.log*
+*.log
+.DS_Store
+.vscode/
+.env

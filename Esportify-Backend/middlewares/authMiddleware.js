@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // ← Asegúrate de importar tu modelo User
+const User = require('../models/User'); 
 
 const auth = async (req, res, next) => {
   const authHeader = req.header('Authorization');
@@ -11,7 +11,6 @@ const auth = async (req, res, next) => {
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Aquí traes toda la info del usuario
     const user = await User.findById(verified.id);
     if (!user) return res.status(401).json({ message: 'Usuario no encontrado' });
 

@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');    
 const connectDB = require('./config/db');
-const mobaRoutes = require('./routes/mobaTeamRoutes');
+const teamRoutes = require('./routes/teamRoutes');
 const mainRoutes = require('./routes/mainRouters');
 
 dotenv.config();
@@ -14,9 +14,9 @@ app.use(cors());
 
 app.use('/api/users', require('./routes/userRouters'));
 
-app.use('/api/mobaTeams', mobaRoutes);
+app.use('/api/teams', teamRoutes);
 app.use('/api/events', mainRoutes);
-app.use('/api/mobaTeams', require('./routes/mobaTeamRoutes'));
+app.use('/api/teams', require('./routes/teamRoutes'));
 
 
 const PORT = process.env.PORT || 5000;

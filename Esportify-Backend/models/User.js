@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
 
   perteneceEquipo: { type: Boolean, default: false },
   equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
-  rolEnEquipo: { type: String },
+  
+  role: { type: String, enum: ["player", "coach", "admin"], default: "player" },
 
   torneos: [{  // Historial de torneos
     nombre: { type: String },
@@ -38,6 +39,14 @@ const userSchema = new mongoose.Schema({
   aceptaPrivacidad: { type: Boolean, default: false },
   notificaciones: { type: Boolean, default: true },
 
+  //Campo coach
+  coachData: {
+    experienceAge: { type: Number },
+    lastTeam: { type: String },
+    certifications: [{ type: String }],
+    number: { type: Number }
+  }
 }, { timestamps: true });
+
 
 module.exports = mongoose.model('User', userSchema);
