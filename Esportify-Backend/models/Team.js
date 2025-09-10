@@ -2,17 +2,17 @@ const mongoose = require('mongoose');
 
 // Subdocumento para info de verificación de jugador/coach
 const memberDataSchema = new mongoose.Schema({
-  nickname: { type: String },   // gamer tag
-  experience: { type: Number }, // años de experiencia
-  rank: { type: String },       // rango dentro del juego
-
+  nickname: { type: String },
+  experience: { type: Number },
+  rank: { type: String },
+ 
   // Si es universitario
   studentId: { type: String },
   faculty: { type: String },
 
   // Info común
-  documentId: { type: String }, // cédula/pasaporte
-  image: { type: String }       // foto verificación
+  documentId: { type: String },
+  image: { type: String }
 }, { _id: false });
 
 const playerSchema = new mongoose.Schema({
@@ -35,7 +35,7 @@ const teamSchema = new mongoose.Schema({
   gender: { type: String, enum: ["Masculino", "Femenino", "Mixto"], required: true },
 
   isUniversity: { type: Boolean, default: false },
-  university: { type: String }, // opcional
+  university: { type: String },
 
   country: {
     type: String,
@@ -47,15 +47,13 @@ const teamSchema = new mongoose.Schema({
     required: true
   },
 
-  // Referencia al juego
+  
   game: { type: mongoose.Schema.Types.ObjectId, ref: "Game", required: true },
 
-  // Miembros
-  players: [playerSchema],         // titulares
-  substitutes: [substituteSchema], // máximo 2
+  
+  players: [playerSchema],
+  substitutes: [substituteSchema],
   coach: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 
   verified: { type: Boolean, default: false },
   qrCode: { type: String }

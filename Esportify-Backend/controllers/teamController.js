@@ -2,38 +2,44 @@ const Team = require('../models/Team');
 const User = require('../models/User');
 
 exports.createTeam = async (req, res) => {
-    try {
-        const { game, image, name, teamGender, universitario, universidad, teamCountrys, coach } = req.body;
+  try {
+    const { game, logo, name, gender, isUniversity, university, country, coach } = req.body;
 
-        const existingteam = await Team.findOne({ name });
-        if (existingteam) {
-            return res.status(400).json({ messege: 'El nombre del equipo ya existe.' });
-        }
-
-        const team = new Team({
-            game,
-            image,
-            name,
-            teamGender,
-            universitario: universitario ?? false,
-            universidad: universidad ?? '',
-            teamCountrys,
-            coach: coach ?? null,
-        });
-
-        await team.save();
-
-        await User.findByIdAndUpdate(req.user._id, {
-            perteneceEquipo: true,
-            equipo: team._id
-        });
-
-        res.status(201).json({ messege: 'Equipo creado con exito.', team });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ messege: 'Error al crear el equipo.' });
+    // Verificar si el equipo ya existe
+    const existingTeam = await Team.findOne({ name });
+    if (existingTeam) {
+      return res.status(400).json({ message: 'El nombre del equipo ya existe.' });
     }
+
+    // Crear el equipo
+    const team = new Team({
+      game,
+      logo,                    
+      name,
+      gender,                 
+      isUniversity: isUniversity ?? false,
+      university: university ?? '',
+      country,
+      coach: coach ?? null,
+      players: [],              
+      substitutes: [],          
+    });
+
+    await team.save();
+
+    // Actualizar al usuario que creó el equipo
+    await User.findByIdAndUpdate(req.user._id, {
+      perteneceEquipo: true,
+      equipo: team._id
+    });
+
+    res.status(201).json({ message: 'Equipo creado con éxito.', team });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al crear el equipo.' });
+  }
 };
+
 
 exports.joinTeam = async (req, res) => {
     try {
