@@ -15,15 +15,15 @@ class RegisterStepThree extends StatefulWidget {
 class _RegisterStepThreeState extends State<RegisterStepThree> {
   // -------------------- Juegos (9 items, Overwatch2 eliminado) --------------------
   final List<Map<String, String>> _games = [
-    {'id': 'hok', 'asset': 'assets/registro/hok.logo.png'},
-    {'id': 'lol', 'asset': 'assets/registro/lol.logo.png'},
-    {'id': 'mlbb', 'asset': 'assets/registro/mlbb.logo.png'},
-    {'id': 'mk', 'asset': 'assets/registro/MK.logo.png'},
-    {'id': 'sf6', 'asset': 'assets/registro/sf6.logo.png'},
-    {'id': 'tft', 'asset': 'assets/registro/tft.logo.png'},
-    {'id': 'wildrift', 'asset': 'assets/registro/wldrft.logo.png'},
-    {'id': 'marvel', 'asset': 'assets/registro/marvel.logo.png'},
-    {'id': 'freefire', 'asset': 'assets/registro/Frefire.logo.png'},
+    {'id': 'hok', 'asset': 'lib/assets/registro/hok.logo.png'},
+    {'id': 'lol', 'asset': 'lib/assets/registro/lol.logo.png'},
+    {'id': 'mlbb', 'asset': 'lib/assets/registro/mlbb.logo.png'},
+    {'id': 'mk', 'asset': 'lib/assets/registro/MK.logo.png'},
+    {'id': 'sf6', 'asset': 'lib/assets/registro/sf6.logo.png'},
+    {'id': 'tft', 'asset': 'lib/assets/registro/tft.logo.png'},
+    {'id': 'wildrift', 'asset': 'lib/assets/registro/wldrft.logo.png'},
+    {'id': 'marvel', 'asset': 'lib/assets/registro/marvel.logo.png'},
+    {'id': 'freefire', 'asset': 'lib/assets/registro/Frefire.logo.png'},
   ];
   final Set<String> _selectedGames = {};
 

@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
   bool _isLoading = false;
+  bool _isPasswordVisible = false;
 
   Future<void> _login() async {
     final user = _userCtrl.text.trim();
@@ -140,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _passCtrl,
-                  obscureText: true,
+                  obscureText:!_isPasswordVisible,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
                       Icons.lock_outline,
@@ -153,6 +154,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
                     ),
+                     suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                      ),
                   ),
                 ),
                 Align(

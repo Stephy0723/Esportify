@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.0.9:5000/api/users';
+  static const String baseUrl = 'https://kxllf6vx-5000.use2.devtunnels.ms/api/users';
 
   // usuario y correo
   static Future<Map<String, dynamic>> checkUsernameAvailability(
