@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const teamSchema = new mongoose.Schema({
+const teamSchema = new mongoose.Schema(
+    {
     name: { type: String, required: true },
     logo: { type: String, required: true },
     gender: {
@@ -20,10 +21,12 @@ const teamSchema = new mongoose.Schema({
         required: true
     },
     game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game', required: true }, 
-    players: [{
-    role: { type: String, required: true }, // Ej: EXP, Mid
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-}],
+    players:
+        [{
+            role: { type: String, required: true }, // Ej: EXP, Mid
+            userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+        }],
+        
     substitutes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     coach: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 

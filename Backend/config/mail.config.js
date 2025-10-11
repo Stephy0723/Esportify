@@ -46,7 +46,7 @@ const getTemplate = (name, token) => {
     <div id="email__content">
       <h2>Hola, ${name}</h2>
       <p>Para confirmar tu cuenta, ingresa al siguiente enlace:</p>
-      <a href="http://localhost:5000/api/users/confirmEmail/${token}">Confirmar Cuenta</a>
+      <a href="http://localhost:3000/api/users/confirmEmail/${token}">Confirmar Cuenta</a>
     </div>
   </body>
 </html>`;

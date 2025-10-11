@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');    
 const connectDB = require('./config/db');
 const mainRoutes = require('./routes/mainRouters');
+const tournamentRoutes = require('./routes/tournamentRouter')
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,7 @@ app.use(cors());
 
 
 app.use('/api/events', mainRoutes);
+app.use('/api/tournament',tournamentRoutes );
 app.use('/api/users', require('./routes/userRouters'));
 
 
