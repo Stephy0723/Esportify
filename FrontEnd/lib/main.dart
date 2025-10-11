@@ -25,4 +25,4 @@ class EsportefyApp extends StatelessWidget {
       home: const WelcomeScreen(), // <- Aquí se inicia ahora
     );
   }
-}
+}   
