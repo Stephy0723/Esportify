@@ -19,6 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passCtrl = TextEditingController();
   bool _isLoading = false;
   bool _isPasswordVisible = false;
+  bool _rememberPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLoginData();
+  }
 
   Future<void> _login() async {
     final user = _userCtrl.text.trim();
@@ -35,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       return;
     }
+    
 
     setState(() => _isLoading = true);
 
@@ -47,8 +55,16 @@ class _LoginScreenState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('jwt_token', token);
         await prefs.setString('username', data['username']);
-        /*await prefs.setString('email', data['email']);*/
 
+        if (_rememberPassword) {
+          await prefs.setString('last_user', user);
+          await prefs.setString('last_password', pass);
+          await prefs.setBool('remember_password', true);
+        } else {
+          await prefs.remove('last_user');
+          await prefs.remove('last_password');
+          await prefs.setBool('remember_password', false);
+        }
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -76,6 +92,21 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+
+Future<void> _loadSavedLoginData() async {
+  final prefs = await SharedPreferences.getInstance();
+  final remember = prefs.getBool('remember_password') ?? false;
+
+  if (remember) {
+    final savedUser = prefs.getString('last_user') ?? '';
+    final savedPass = prefs.getString('last_password') ?? '';
+    setState(() {
+      _userCtrl.text = savedUser;
+      _passCtrl.text = savedPass;
+      _rememberPassword = true;
+    });
+  }
+}
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -186,6 +217,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                ),
+                CheckboxListTile(
+                  title: const Text('Recordar usuario y contraseña'),
+                  value: _rememberPassword,
+                  onChanged: (value) {
+                    setState(() {
+                      _rememberPassword = value ?? false;
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
