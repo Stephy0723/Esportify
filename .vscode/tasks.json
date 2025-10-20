@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "Esportify-Backend",
+			"problemMatcher": [],
+			"label": "npm: dev - Esportify-Backend",
+			"detail": "nodemon app.js"
+		}
+	]
+}

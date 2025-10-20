@@ -1,8 +1,11 @@
 // lib/page/chat_general_page.dart
 import 'package:flutter/material.dart';
+import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 
 class ChatGeneralPage extends StatelessWidget {
+
+
   const ChatGeneralPage({super.key});
 
   // Ejemplo de datos
@@ -74,7 +77,7 @@ class ChatGeneralPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => const HomePage()),
+                      MaterialPageRoute(builder: (_) => HomePage()),
                     ),
                     child: Container(
                       width: 48,

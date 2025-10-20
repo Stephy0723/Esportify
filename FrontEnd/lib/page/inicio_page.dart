@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../Equipo/crear_equipo_page.dart';
 import '../widgets/Tags_page.dart';
+import '../widgets/Torneo/TorneosSection.dart';
+
 
 class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +15,7 @@ class InicioPage extends StatelessWidget {
     final comunidades = ['Mobile Legends', 'League of Legends'];
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -96,24 +100,8 @@ class InicioPage extends StatelessWidget {
               ),
 
               // ─── TORNEOS ──────────────────────────────────────
-              const Text(
-                "Torneos disponibles",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                height: 110,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    torneoBox("Torneo Valorant - Junio"),
-                    torneoBox("MLBB Clash"),
-                    torneoBox("League of Legends Global"),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 24),
+              const TorneosSection(),// De aqui se llaman los torneos disponibles
+             
 
               // ─── TAGS ─────────────────────────────────────────
               const Text(

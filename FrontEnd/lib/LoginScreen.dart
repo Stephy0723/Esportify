@@ -4,6 +4,8 @@ import 'register/forgot_password_page.dart'; // NUEVA PESTAÑA
 import 'loading/LoadingScreen.dart';
 import 'page/home_page.dart';
 import 'data/connect_to_backend.dart'; // Importa tu servicio
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +18,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userCtrl = TextEditingController();
   final _passCtrl = TextEditingController();
   bool _isLoading = false;
+  bool _isPasswordVisible = false;
+  bool _rememberPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLoginData();
+  }
 
   Future<void> _login() async {
     final user = _userCtrl.text.trim();
@@ -32,12 +42,29 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       return;
     }
+    
 
     setState(() => _isLoading = true);
 
     try {
       final response = await ApiService.loginUser(user, pass);
       if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final token = data['token'];
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('jwt_token', token);
+        await prefs.setString('username', data['username']);
+
+        if (_rememberPassword) {
+          await prefs.setString('last_user', user);
+          await prefs.setString('last_password', pass);
+          await prefs.setBool('remember_password', true);
+        } else {
+          await prefs.remove('last_user');
+          await prefs.remove('last_password');
+          await prefs.setBool('remember_password', false);
+        }
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -45,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onLoadComplete: () async {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => const HomePage()),
+                  MaterialPageRoute(builder: (_) => HomePage()),
                 );
               },
             ),
@@ -65,6 +92,21 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+
+Future<void> _loadSavedLoginData() async {
+  final prefs = await SharedPreferences.getInstance();
+  final remember = prefs.getBool('remember_password') ?? false;
+
+  if (remember) {
+    final savedUser = prefs.getString('last_user') ?? '';
+    final savedPass = prefs.getString('last_password') ?? '';
+    setState(() {
+      _userCtrl.text = savedUser;
+      _passCtrl.text = savedPass;
+      _rememberPassword = true;
+    });
+  }
+}
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -130,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _passCtrl,
-                  obscureText: true,
+                  obscureText:!_isPasswordVisible,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
                       Icons.lock_outline,
@@ -143,6 +185,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
                     ),
+                     suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                      ),
                   ),
                 ),
                 Align(
@@ -164,6 +217,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                ),
+                CheckboxListTile(
+                  title: const Text('Recordar usuario y contraseña'),
+                  value: _rememberPassword,
+                  onChanged: (value) {
+                    setState(() {
+                      _rememberPassword = value ?? false;
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
