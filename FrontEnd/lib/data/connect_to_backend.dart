@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String tournamentUrl = 'http://10.0.0.9:5000/api/tournament';
-  static const String baseUrl = 'http://10.0.0.9:5000/api/users';
+  static const String tournamentUrl =
+      'http://192.168.0.102:5000/api/tournament';
+  static const String baseUrl = 'http://192.168.0.102:5000/api/users';
 
   // usuario y correo
   static Future<Map<String, dynamic>> checkUsernameAvailability(
@@ -114,20 +115,22 @@ class ApiService {
     }
   }
 
-// olvido de contraseña
+  // olvido de contraseña
   static Future<Map<String, dynamic>> sendResetCode(String email) async {
     final url = Uri.parse('$baseUrl/send-Reset-Code');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email}),
-  );
+    );
 
-     if (response.statusCode == 200) {
-    return jsonDecode(response.body);
-  } else {
-    throw Exception('Error al enviar código de recuperación: ${response.body}');
-  }
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception(
+        'Error al enviar código de recuperación: ${response.body}',
+      );
+    }
   }
 
   static Future<Map<String, dynamic>> validateResetCode(
